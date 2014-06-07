@@ -4,6 +4,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//connect.soundcloud.com/sdk.js"></script>
+        <script>
+          SC.initialize({
+            client_id: "ceed35cb3c4ba8b5d498475ae6e966b6"
+          });
+        </script>
+        <script src="/js/audioplayer.js"></script>
     </head>
     <body>
         <div class="container-fluid">
@@ -27,6 +35,14 @@
                         <span class="post-type">Word</span>
                         <h5>25 Dec 1987</h5>
                         <p>On this day was I born into a world of <a href="#">outlandish</a> 80's music, cocaine and the burgeoning high-fructose-corny-syrup markets</p>
+                    </div>
+                    <div class="post">
+                        <h2>A Sweet Tune</h2>
+                        <span class="post-type">Audio</span>
+                        <h5>07 Jun 2014</h5>
+                        <p>On this day was I born into a world of <a href="#">outlandish</a> 80's music, cocaine and the burgeoning high-fructose-corny-syrup markets</p>
+                        <div class="audio-player">
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-2 art">
