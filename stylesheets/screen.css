@@ -1,0 +1,56 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 11, ../sass/screen.scss */
+* {
+  font-family: arial;
+}
+
+/* line 14, ../sass/screen.scss */
+a {
+  color: #9e8b00;
+}
+/* line 16, ../sass/screen.scss */
+a:hover {
+  color: black;
+}
+
+/* line 20, ../sass/screen.scss */
+h1 {
+  font-size: 6em;
+  letter-spacing: -.05em;
+}
+
+/* line 24, ../sass/screen.scss */
+h2 {
+  letter-spacing: -2px;
+}
+
+/* line 27, ../sass/screen.scss */
+.header h1 {
+  font-weight: 700;
+  font-size: 8em;
+}
+
+/* line 32, ../sass/screen.scss */
+.header .nav a {
+  color: #9e8b00;
+}
+/* line 34, ../sass/screen.scss */
+.header .nav a:hover, .header .nav a:active {
+  color: black;
+  background-color: #ffe000;
+}
+
+/* line 41, ../sass/screen.scss */
+.post h2 {
+  display: inline-block;
+}
+
+/* line 45, ../sass/screen.scss */
+.post-type {
+  font-style: italic;
+  color: gray;
+  margin-left: 10px;
+}

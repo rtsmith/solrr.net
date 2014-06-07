@@ -1,0 +1,49 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+// @import "compass/reset";
+
+$link-color: #9E8B00;
+$accent-color: #FFE000;
+
+* {
+    font-family: arial;
+}
+a {
+    color: $link-color;
+    &:hover {
+        color: black;
+    }
+}
+h1 {
+    font-size: 6em;
+    letter-spacing: -.05em;
+}
+h2 {
+    letter-spacing: -2px;
+}
+.header h1 {
+    font-weight: 700;
+    font-size: 8em;
+}
+.header .nav {
+    a {
+        color: $link-color;
+        &:hover, &:active {
+            color: black;
+            background-color: $accent-color;
+        }
+    }
+}
+.post {
+    h2 {
+        display: inline-block;
+    }
+}
+.post-type {
+    font-style: italic;
+    color: lighten(black, 50%);
+    margin-left: 10px;
+}
