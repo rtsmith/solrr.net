@@ -29,4 +29,11 @@ $(function() {
         var meta = "<h4>Track Title - Artist</h4>";
         $element.append($controls).append(meta);
     }
+
+    $('.art').height($(window).height());
 });
+
+
+
+
+

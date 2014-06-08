@@ -24,6 +24,9 @@ h1 {
 h2 {
     letter-spacing: -2px;
 }
+.header {
+    border-top: 10px solid $accent-color;
+}
 .header h1 {
     font-weight: 700;
     font-size: 8em;
@@ -49,8 +52,8 @@ h2 {
 }
 .audio-player {
     position: relative;
-    border-left: 1px solid $accent-color;
-    border-right: 1px solid $accent-color;
+    border-left: 6px solid $accent-color;
+    border-right: 6px solid $accent-color;
     padding: 0 2em;
     h4 {
         display: inline-block;
@@ -71,5 +74,11 @@ h2 {
             a.play { display: none; }
         }
     }
+}
+.art {
+    display: none;
+    border: 3px solid $accent-color;
+    position: fixed;
+    right: 0;
 }
     
