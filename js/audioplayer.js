@@ -12,7 +12,6 @@ Audioplayer.prototype.resolve_callback = function(data) {
     this.artist = data.user.username;
     // used for passing passing into the streamer
     this.api_track_url = "/tracks/" + this.track_id;
-    console.log(data);
 }
 Audioplayer.prototype.resolve = function() {
     var that = this;
@@ -21,27 +20,31 @@ Audioplayer.prototype.resolve = function() {
 
 // Sound manager /////////////////////////////////////////////////////////////////////
 var streamer = {
-    current_sound : "",
-    play : function(track) {
+    current_sound : {},
+    play : function(track, callback) {
         var that = this;
+
+        // 
+        if (that.current_sound.playState === 1 && that.current_sound.sID === track.sound.sID) {
+            that.resume(callback);
+            return
+        }
+
         SC.stream(track.api_track_url, function(sound) {
             sound.play();
             // assign Audioplayer the sound
             track.sound = sound;
             // assign SoundManager the Audioplayer's sound as current sound
             that.current_sound = track.sound;
+            callback();
         });
     },
-    stop : function() {
-        this.current_sound.stop();
-    },
-    resume : function() {
+    resume : function(callback) {
         this.current_sound.resume();
+        callback();
     },
-    pause : function() {
+    pause : function(callback) {
         this.current_sound.pause();
+        callback();
     }
 }
-
-
-
