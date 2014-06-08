@@ -23,7 +23,7 @@ $(function() {
             });
         var $pause_button = $('<a class="btn pause"><span class="glyphicon glyphicon-pause"></span></a>')
             .on('click', function() {
-                streamer.pause(setPaused);
+                streamer.pause(track, setPaused);
             });
         var $controls = $('<div class="controls"></div>').append($play_button).append($pause_button);
         var meta = "<h4>Track Title - Artist</h4>";

@@ -24,9 +24,9 @@ var streamer = {
     play : function(track, callback) {
         var that = this;
 
-        // 
+        // if it's the same track and just paused, resume playing
         if (that.current_sound.playState === 1 && that.current_sound.sID === track.sound.sID) {
-            that.resume(callback);
+            that.resume(track, callback);
             return
         }
 
@@ -39,12 +39,12 @@ var streamer = {
             callback();
         });
     },
-    resume : function(callback) {
-        this.current_sound.resume();
+    resume : function(track, callback) {
+        track.sound.resume();
         callback();
     },
-    pause : function(callback) {
-        this.current_sound.pause();
+    pause : function(track, callback) {
+        track.sound.pause();
         callback();
     }
 }
