@@ -12,13 +12,14 @@ Audioplayer.prototype.resolve_callback = function(data) {
     this.artist = data.user.username;
     // used for passing passing into the streamer
     this.api_track_url = "/tracks/" + this.track_id;
+    console.log(data);
 }
 Audioplayer.prototype.resolve = function() {
     var that = this;
     $.get( this.endpoint, function(data) { that.resolve_callback(data) } ); 
 }
 
-var track1 = new Audioplayer("mezla/mini-fuge");
+// var track1 = new Audioplayer("mezla/mini-fuge");
 
 
 // Sound manager /////////////////////////////////////////////////////////////////////
