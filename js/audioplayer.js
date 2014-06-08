@@ -19,9 +19,6 @@ Audioplayer.prototype.resolve = function() {
     $.get( this.endpoint, function(data) { that.resolve_callback(data) } ); 
 }
 
-// var track1 = new Audioplayer("mezla/mini-fuge");
-
-
 // Sound manager /////////////////////////////////////////////////////////////////////
 var streamer = {
     current_sound : "",
