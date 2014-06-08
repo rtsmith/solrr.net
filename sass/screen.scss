@@ -47,3 +47,24 @@ h2 {
     color: lighten(black, 50%);
     margin-left: 10px;
 }
+.audio-player {
+    position: relative;
+    border-left: 1px solid $accent-color;
+    border-right: 1px solid $accent-color;
+    padding: 0 2em;
+    h4 {
+        display: inline-block;
+        margin-left: 1em;
+        line-height: 1.3em;
+    }
+    .controls {
+        display: inline-block;
+        a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 1.4em;
+        }
+    }
+}
+    
