@@ -3,15 +3,20 @@
     //     new Audioplayer(url);
     // });
 $(function() {
-    var url = $('.audio-player').data('track');
-    var track = new Audioplayer(url);
-    var $play_button = $('.audio-player .btn.play');
-    var $pause_button = $('.audio-player .btn.pause');
+    $('.audio-player').each( function(i) {
+        initPlayer($(this))
+    });
+    function initPlayer($player) {
+        var url = $player.data('track');
+        var track = new Audioplayer(url);
+        var $play_button = $player.find('.btn.play');
+        var $pause_button = $player.find('.btn.pause');
 
-    $play_button.on('click', function() {
-        streamer.play(track);
-    });
-    $pause_button.on('click', function() {
-        streamer.pause();
-    });
+        $play_button.on('click', function() {
+            streamer.play(track);
+        });
+        $pause_button.on('click', function() {
+            streamer.pause();
+        });
+    }
 });
