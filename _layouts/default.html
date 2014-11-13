@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+        <script src="//connect.soundcloud.com/sdk.js"></script>
+        <script>
+          SC.initialize({
+            client_id: "ceed35cb3c4ba8b5d498475ae6e966b6"
+          });
+        </script>
+        <script src="/js/audioplayer.js"></script>
+        <script src="/js/main.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="header col-xs-12 col-md-3">
+                    <h1>Solrr</h1>
+                    <ul class="nav">
+                        <li>
+                            <a href="#">Word</a>
+                        </li>
+                        <li>
+                            <a href="#">Audio</a>
+                        </li>
+                        <li>
+                            <a href="#">Visual</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content col-xs-12 col-md-7">
+                    {{ content }}
+                </div>
+                <div class="col-md-2 art">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
