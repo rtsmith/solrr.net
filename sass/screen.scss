@@ -5,9 +5,18 @@
 
 // @import "compass/reset";
 
-$link-color: #9E8B00;
-$accent-color: #FFE000;
 
+$accent-color: #FFE000;
+$link-color: darken($accent-color, 5%);
+$color: lighten(black, 97%);
+
+html, body {
+    background: lighten(black, 10%);
+}
+p, span,
+h1, h2, h3, h4, h5, h6 {
+    color: $color;
+}
 * {
     font-family: arial;
 }
@@ -15,6 +24,8 @@ a {
     color: $link-color;
     &:hover {
         color: black;
+        background-color: $link-color;
+        text-decoration: none
     }
 }
 h1 {
@@ -41,14 +52,23 @@ h2 {
     }
 }
 .post {
+    margin-bottom: 2em;
     h2 {
-        display: inline-block;
+        display: inline;
     }
+    .wrapper {
+        margin-bottom: 1em;
+    }
+}
+.post-details {
+    display: inline-block;
+    position: relative;
+    margin-left: 1em;
+    h5 { margin: 0; }
 }
 .post-type {
     font-style: italic;
     color: lighten(black, 50%);
-    margin-left: 10px;
 }
 .audio-player {
     position: relative;
