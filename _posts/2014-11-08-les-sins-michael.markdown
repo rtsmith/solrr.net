@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Les Sins - "Michael"'
-type: audio
+category: audio
 soundcloud: 173360343
 ---
 After a few rousing singles Toro y Moi's dancefloor-oriented moniker produces the debut album. 

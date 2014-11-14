@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Akkord x The Haxan Cloak'
-type: audio
+category: audio
 soundcloud: 176707445
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Lee Gamble - "Koch"'
-type: audio
+category: audio
 soundcloud: 162786462
 ---
 
