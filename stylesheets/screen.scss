@@ -131,3 +131,14 @@ h2 {
     right: 0;
 }
     
+// Media Queries
+@media (max-width: 768px) {
+    .post-details {
+        display: block;
+        margin-left: 0;
+        h5 { 
+            display: inline-block;
+            margin-left: 5px;
+        }
+    }
+}
