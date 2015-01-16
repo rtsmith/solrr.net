@@ -5,5 +5,5 @@ category: audio
 soundcloud: 176707445
 ---
 
-Dons of brutalist electronic music converge as The Haxan Cloak uses elements from the entirety of Akkords latest EP as his pallete on this epic remix. 
-Stark rolling constructions give way to a sustained emotive climax once the listener is properly eroded away by thunderous bass stabs.
+Dons of brutalist electronic music converge as The Haxan Cloak selects elements from the entirety of [Akkords](https://soundcloud.com/akkordmusik) 
+latest EP as his pallete on this epic remix.  Rolling constructions give way to a sustained oblivion once the listener is properly eroded away by thunderous bass stabs.

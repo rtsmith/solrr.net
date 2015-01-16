@@ -4,6 +4,6 @@ title: 'Les Sins - "Michael"'
 category: audio
 soundcloud: 173360343
 ---
-After a few rousing singles Toro y Moi's dancefloor-oriented moniker produces the debut album. 
-The work moves across an array of sentiments employing solid song writing and hooks in all the right places. 
-Areas of funky bits and classic house shuffles keep the head bobbing and the album as a whole cohesive. The unique 'ardcore vibes on "Call" and breaks on "Drop" are particular highlights.
+After a few rousing singles the debut album from Toro y Moi's dancefloor-oriented moniker is here. 
+Modern funk and classic house shuffles arranged with with a pop music sensibility keep the album cohesive and engaging. 
+The unique 'ardcore vibes on "Call" and breaks on "Drop" are particular highlights.

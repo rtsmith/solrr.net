@@ -55,16 +55,12 @@ h2 {
 }
 .header {
     border-top: 10px solid $accent-color;
-}
-.header {
-    h1 {
-        font-weight: 700;
-        font-size: 8em;
-        &:hover {
-            font-style: italic;
-        }
-        &:active {
-            font-style: italic;
+    text-align: center;
+    .logo  {
+        display: inline-block;
+        margin: 2em 0;
+        img {
+            max-width: 300px;
         }
     }
 }
