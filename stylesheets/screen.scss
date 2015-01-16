@@ -7,6 +7,10 @@ $accent-color: #FFE000;
 $link-color: darken($accent-color, 5%);
 $color: lighten(black, 97%);
 
+img {
+    max-width: 100%;
+}
+
 // footer controls
 $footer-height: 40px;
 html {
@@ -60,7 +64,7 @@ h2 {
         display: inline-block;
         margin: 2em 0;
         img {
-            max-width: 300px;
+            max-height: 200px;
         }
     }
 }
