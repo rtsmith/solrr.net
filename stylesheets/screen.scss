@@ -4,7 +4,7 @@
 
 
 $accent-color: #FFE000;
-$link-color: darken($accent-color, 5%);
+$link-color: $accent-color;
 $color: lighten(black, 5%);
 
 img {
@@ -33,7 +33,7 @@ footer {
 }
 
 html, body {
-    background: lighten(black, 95%);
+    background: white;
 }
 p, span,
 h1, h2, h3, h4, h5, h6 {
