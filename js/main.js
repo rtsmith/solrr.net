@@ -7,14 +7,17 @@ SC.initialize({
 
 var TrackPlayer = React.createClass({
   getInitialState: function() {
-    return {data: {}};
+    return {
+      playing: false,
+      data: {}
+    };
+  },
+  handleToggle: function() {
+    this.state.playing ? this.setState({playing: false}) : this.setState({playing: true});
   },
   componentDidMount: function() {
     var self = this;
-    // need to skip url resolution if ID provided
-    SC.resolve(`http://soundcloud.com/${this.props.url}`).then((track) => {
-      return SC.get(`/tracks/${track.id}`);
-    }).then(function(data) {
+    SC.get(`/tracks/${this.props.id}`).then(function(data) {
       self.setState({data: data});
     }).catch(function(error) {
       console.error(self.props.url, status, error.message);
@@ -25,28 +28,29 @@ var TrackPlayer = React.createClass({
       <div className="track-player">
         {/* use a title we provide */}
         <h4>{this.props.title}</h4>
-        <PlayToggle />
-        <PlayProgress data={this.state.data} />
+        <PlayToggle onToggleClick={this.handleToggle} />
+        <PlayProgress data={this.state.data} playing={this.state.playing}/>
       </div>
     );
   }
 });
 
 // try out stateless components
-const PlayToggle = () =>
+const PlayToggle = (props) =>
   <div className="play-toggle">
-    <a>play button</a>
+    <a onClick={props.onToggleClick}>play button</a>
   </div>
 
 const PlayProgress = (props) =>
   <div className="play-progress">
     <span>length: {props.data.duration}</span>
+    <span>playing: {props.playing.toString()}</span>
   </div>
 
 $('.audio-player').each(function() {
   var data = $(this).data();
   ReactDOM.render(
-    <TrackPlayer url={data.url} id={data.id} title={data.title} />,
+    <TrackPlayer id={data.track_id} title={data.title} />,
     this
   );
 });
