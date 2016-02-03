@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 'Lee Gamble - "Koch"'
+title: "Lee Gamble - 'Koch'"
 category: audio
-soundcloud: 162786462
+soundcloud-url: "pan_hq/lee-gamble-motor-system-pan-59"
 ---
 
 Techno ruffage propels vintage dreamscapes in Lee Gamble's return to PAN records. Essentially a 

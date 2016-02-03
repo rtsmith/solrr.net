@@ -1,39 +1,53 @@
-$(function() {
-    $('.audio-player').each( function(i) {
-        initPlayer($(this))
-    });
-
-    function initPlayer($player) {
-        var url = $player.data('track');
-        var track = new Audioplayer(url);
-
-        generateControls($player, track);
-    }
-
-    function generateControls($element, track) {
-        function setPlaying() {
-            $element.find(".controls").addClass("playing");
-        }
-        function setPaused() {
-            $element.find(".controls").removeClass("playing");
-        }
-        var $play_button = $('<a class="btn play"><span class="glyphicon glyphicon-play"></span></a>')
-            .on('click', function() {
-                streamer.play(track, setPlaying);
-            });
-        var $pause_button = $('<a class="btn pause"><span class="glyphicon glyphicon-pause"></span></a>')
-            .on('click', function() {
-                streamer.pause(track, setPaused);
-            });
-        var $controls = $('<div class="controls"></div>').append($play_button).append($pause_button);
-        var meta = "<h4>Track Title - Artist</h4>";
-        $element.append($controls).append(meta);
-    }
-
-    $('.art').height($(window).height());
+var React = require('react');
+var ReactDOM = require('react-dom');
+var client_id = "ceed35cb3c4ba8b5d498475ae6e966b6";
+SC.initialize({
+  client_id: client_id
 });
 
+var TrackPlayer = React.createClass({
+  getInitialState: function() {
+    return {data: {}};
+  },
+  componentDidMount: function() {
+    var self = this;
+    // need to skip url resolution if ID provided
+    SC.resolve(`http://soundcloud.com/${this.props.url}`).then((track) => {
+      return SC.get(`/tracks/${track.id}`);
+    }).then(function(data) {
+      self.setState({data: data});
+    }).catch(function(error) {
+      console.error(self.props.url, status, error.message);
+    });
+  },
+  render: function() {
+    return (
+      <div className="track-player">
+        {/* use a title we provide */}
+        <h4>{this.props.title}</h4>
+        <PlayToggle />
+        <PlayProgress data={this.state.data} />
+      </div>
+    );
+  }
+});
 
+// try out stateless components
+const PlayToggle = () =>
+  <div className="play-toggle">
+    <a>play button</a>
+  </div>
 
+const PlayProgress = (props) =>
+  <div className="play-progress">
+    <span>length: {props.data.duration}</span>
+  </div>
 
+$('.audio-player').each(function() {
+  var data = $(this).data();
+  ReactDOM.render(
+    <TrackPlayer url={data.url} id={data.id} title={data.title} />,
+    this
+  );
+});
 

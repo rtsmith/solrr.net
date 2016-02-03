@@ -10,5 +10,10 @@ layout: default
         </div>
     </div>
     {{ content }}
-    <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ page.soundcloud }}&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+
+    {% if post.soundcloud-url %}
+    <div class="audio-player" data-title="{{ post.title }}" data-track_url="{{ post.soundcloud-url }}"></div>
+    {% else post.soundcloud %}
+    <div class="audio-player" data-title="{{ post.title }}" data-track_id="{{ post.soundcloud }}"></div>
+    {% endif %}
 </div>

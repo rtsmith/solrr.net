@@ -99,7 +99,8 @@ h2 {
     font-style: italic;
     color: lighten(black, 50%);
 }
-.audio-player {
+///////////////
+.track-player {
     position: relative;
     border-left: 6px solid $accent-color;
     border-right: 6px solid $accent-color;
@@ -109,21 +110,22 @@ h2 {
         margin-left: 1em;
         line-height: 1.3em;
     }
-    .controls {
-        display: inline-block;
-        a {
-            position: absolute;
-            top: 0;
-            left: 0;
-            font-size: 1.4em;
-            &.pause { display: none; }
-        }
-        &.playing {
-            a.pause { display: block; }
-            a.play { display: none; }
-        }
+}
+.play-toggle {
+    display: inline-block;
+    a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 1.4em;
+        &.pause { display: none; }
+    }
+    &.playing {
+        a.pause { display: block; }
+        a.play { display: none; }
     }
 }
+/////////////
 .art {
     display: none;
     border: 3px solid $accent-color;

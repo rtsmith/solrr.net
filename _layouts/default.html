@@ -7,16 +7,10 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
         <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
-        <script src="//connect.soundcloud.com/sdk.js"></script>
-        <script>
-          SC.initialize({
-            client_id: "ceed35cb3c4ba8b5d498475ae6e966b6"
-          });
-        </script>
-        <script src="/js/audioplayer.js"></script>
-        <script src="/js/main.js"></script>
+        <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
     </head>
     <body>
+        <div id=example></div>
         <div class="container-fluid">
             <div class="row">
                 <div class="header col-xs-12 col-md-3">
@@ -42,5 +36,6 @@
           ga('create', 'UA-34750280-1', 'auto');
           ga('send', 'pageview');
         </script>
+        <script src="js/bundle.js"></script>
     </body>
 </html>
