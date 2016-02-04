@@ -8,7 +8,6 @@ SC.initialize({
   client_id: client_id
 });
 
-
 $('.audio-player').each(function() {
   var data = $(this).data();
   ReactDOM.render(
@@ -16,4 +15,3 @@ $('.audio-player').each(function() {
     this
   );
 });
-
