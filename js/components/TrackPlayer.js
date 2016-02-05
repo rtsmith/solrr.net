@@ -1,14 +1,7 @@
 var React = require('react');
-// react components
-var PlayProgress = require('./components/PlayProgress');
-var PlayToggle = require('./components/PlayToggle');
-// reflux 
-var PlayerActions = require('./actions');
-var PlayerStore = require('./playerStore');
+var PlayProgress = require('./PlayProgress');
+var PlayToggle = require('./PlayToggle');
 
-
-// a track only needs to know if it's playing and if so
-// what seek position
 var TrackPlayer = React.createClass({
   getInitialState: function() {
     return {
@@ -16,7 +9,6 @@ var TrackPlayer = React.createClass({
       data: {}
     };
   },
-
   componentDidMount: function() {
     var self = this;
     SC.get(`/tracks/${this.props.id}`).then(function(data) {
@@ -25,11 +17,10 @@ var TrackPlayer = React.createClass({
       console.error(self.props.url, status, error.message);
     });
   },
-
   handleToggle: function() {
-    PlayerActions.playToggle(this.state.data.title);
+    // this.state.playing ? this.setState({playing: false}) : this.setState({playing: true});
+    playerUpdate(this.props.id);
   },
-
   render: function() {
     return (
       <div className="track-player">
