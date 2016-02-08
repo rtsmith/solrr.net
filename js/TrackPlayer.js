@@ -1,10 +1,8 @@
 var React = require('react');
-// react components
 var PlayProgress = require('./components/PlayProgress');
 var PlayToggle = require('./components/PlayToggle');
-// reflux 
-var PlayerActions = require('./actions');
-var PlayerStore = require('./playerStore');
+var TrackActions = require('./actions');
+var TracksStore = require('./tracksStore');
 
 
 // a track only needs to know if it's playing and if so
@@ -17,7 +15,9 @@ var TrackPlayer = React.createClass({
     };
   },
 
-  componentDidMount: function() {
+  // we will want track data to be rendered serverside,
+  // so use componentWillMount hook
+  componentWillMount: function() {
     var self = this;
     SC.get(`/tracks/${this.props.id}`).then(function(data) {
       self.setState({data: data});
@@ -26,8 +26,20 @@ var TrackPlayer = React.createClass({
     });
   },
 
+  // TODO this can be a pure function
+  willPlay: function(id) {
+    return this.state.data.id == id && !this.state.playing ? true : false;
+  },
+
+  componentDidMount: function() {
+    var self = this;
+    TracksStore.listen(function(id) {
+      self.setState({ playing: self.willPlay(id) });
+    });
+  },
+
   handleToggle: function() {
-    PlayerActions.playToggle(this.state.data.title);
+    TrackActions.playToggle(this.state.data.id);
   },
 
   render: function() {
