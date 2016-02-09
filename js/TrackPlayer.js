@@ -5,18 +5,21 @@ var TrackActions = require('./actions');
 var TracksStore = require('./tracksStore');
 
 
-// a track only needs to know if it's playing and if so
-// what seek position
+// playerUI just needs to send what track it is and what
+// actions correspond to what buttons pressed
 var TrackPlayer = React.createClass({
   getInitialState: function() {
+    // sync doesnt happen here!
     return {
-      playing: false,
+      idLoaded: 0,
+      seek: 0,
+      isPlaying: false,
       data: {}
     };
   },
 
   // we will want track data to be rendered serverside,
-  // so use componentWillMount hook
+  // so use componentWillMount hook for this init load
   componentWillMount: function() {
     var self = this;
     SC.get(`/tracks/${this.props.id}`).then(function(data) {
@@ -26,20 +29,16 @@ var TrackPlayer = React.createClass({
     });
   },
 
-  // TODO this can be a pure function
-  willPlay: function(id) {
-    return this.state.data.id == id && !this.state.playing ? true : false;
-  },
-
   componentDidMount: function() {
-    var self = this;
-    TracksStore.listen(function(id) {
-      self.setState({ playing: self.willPlay(id) });
-    });
+    TracksStore.listen(function(track_state) {
+      this.setState(track_state);
+    }.bind(this));
   },
 
-  handleToggle: function() {
-    TrackActions.playToggle(this.state.data.id);
+  handlePlayToggle: function() {
+    this.state.isPlaying ?
+      TrackActions.trackStop(this.state)
+    : TrackActions.trackPlay(this.state)
   },
 
   render: function() {
@@ -47,8 +46,8 @@ var TrackPlayer = React.createClass({
       <div className="track-player">
         {/* use a title we provide */}
         <h4>{this.props.title}</h4>
-        <PlayToggle onToggleClick={this.handleToggle} />
-        <PlayProgress data={this.state.data} playing={this.state.playing}/>
+        <PlayToggle onToggleClick={this.handlePlayToggle} isPlaying={this.state.isPlaying} />
+        <PlayProgress duration={this.state.data.duration} isPlaying={this.state.isPlaying} />
       </div>
     );
   }

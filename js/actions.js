@@ -1,7 +1,8 @@
 var Reflux = require('reflux');
 
 var actions = Reflux.createActions([
-  "playToggle"
+  "trackPlay",
+  "trackStop"
 ])
 
 module.exports = actions;
