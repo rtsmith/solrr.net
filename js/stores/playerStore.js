@@ -5,7 +5,7 @@ var Actions = require('../actions');
 // handles state and logic between tracks.
 // just pass entire "store" object in triggers
 
-var tracksStore = Reflux.createStore({
+var playerStore = Reflux.createStore({
   store: {},
   listenables: Actions,
   onTrackLoadCompleted: function(player) {
@@ -29,4 +29,4 @@ var tracksStore = Reflux.createStore({
   }
 });
 
-module.exports = tracksStore;
+module.exports = playerStore;

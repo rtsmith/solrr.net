@@ -1,5 +1,5 @@
 var Actions = require('../actions');
-var TracksStore = require('../stores/tracksStore');
+var PlayerStore = require('../stores/playerStore');
 
 //
 // BoomBox object:
@@ -7,7 +7,9 @@ var TracksStore = require('../stores/tracksStore');
 // it just listens and fires no actions of its own
 
 function BoomBoxComponent() {
-  TracksStore.listen(function(store) {
+  // TODO the SC player sends a .swf rather than html5 audio
+  // if the track is very long, check if client has flash
+  PlayerStore.listen(function(store) {
     // key really ought to be called "shouldPlay"
     if (!(store.isPlaying)) {
       store.streamer.pause();

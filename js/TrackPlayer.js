@@ -3,7 +3,8 @@ var PlayProgress = require('./components/PlayProgress');
 var PlayToggle = require('./components/PlayToggle');
 var Boombox = require('./components/Boombox');
 var TrackActions = require('./actions');
-var TracksStore = require('./stores/tracksStore');
+var PlayerStore = require('./stores/playerStore');
+var TrackStore = require('./stores/trackStore');
 
 
 // playerUI just needs to send what track it is and what
@@ -14,7 +15,7 @@ var TrackPlayer = React.createClass({
     return {
       idLoaded: 0,
       seek: 0,
-      isPlaying: false, // only one track can be playing at a time
+      isPlaying: false, // Boombox comp is playing? only one track can be playing at a time
       streamer: {},
       data: {}
     };
@@ -23,16 +24,16 @@ var TrackPlayer = React.createClass({
   // we will want track data to be rendered serverside,
   // so use componentWillMount hook for this init load
   componentWillMount: function() {
-    var self = this;
-    SC.get(`/tracks/${this.props.id}`).then(function(data) {
-      self.setState({data: data});
-    }).catch(function(error) {
-      console.error(self.props.url, status, error.message);
-    });
+    TrackActions.dataLoad(this.props.id);
+    TrackStore.listen(function(data) {
+      if (data.id == this.props.id) {
+        this.setState({ data: data });
+      }
+    }.bind(this));
   },
 
   componentDidMount: function() {
-    TracksStore.listen(function(track_state) {
+    PlayerStore.listen(function(track_state) {
       // setState merges objects, so state.data remains
       // the same as long as the store doesn't send it
       this.setState(track_state);
@@ -57,8 +58,8 @@ var TrackPlayer = React.createClass({
       <div className="track-player">
         {/* use a title we provide */}
         <h4>{this.props.title}</h4>
-        <PlayToggle onToggleClick={this.handlePlayToggle} isPlaying={this.state.isPlaying} />
-        <PlayProgress duration={this.state.data.duration} isPlaying={this.state.isPlaying} />
+        <PlayToggle onToggleClick={this.handlePlayToggle} track_data={this.state} />
+        <PlayProgress track_data={this.state} id={this.props.id} />
       </div>
     );
   }
