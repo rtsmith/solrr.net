@@ -58,7 +58,7 @@ var TrackPlayer = React.createClass({
       <div className="track-player">
         {/* use a title we provide */}
         <h4>{this.props.title}</h4>
-        <PlayToggle onToggleClick={this.handlePlayToggle} track_data={this.state} />
+        <PlayToggle onToggleClick={this.handlePlayToggle} track_data={this.state} id={this.props.id}/>
         <PlayProgress track_data={this.state} id={this.props.id} />
       </div>
     );
