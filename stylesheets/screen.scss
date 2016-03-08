@@ -8,139 +8,139 @@ $link-color: $accent-color;
 $color: lighten(black, 5%);
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 // footer controls
 $footer-height: 40px;
 html {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 body {
-    margin-bottom: $footer-height;
+  margin-bottom: $footer-height;
 }
 footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: $footer-height;
-    p {
-        text-align: center;
-        color: lighten(black, 33%);
-    }
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: $footer-height;
+  p {
+    text-align: center;
+    color: lighten(black, 33%);
+  }
 }
 
 html, body {
-    background: white;
+  background: white;
 }
 p, span,
 h1, h2, h3, h4, h5, h6 {
-    color: $color;
+  color: $color;
 }
 * {
-    font-family: arial;
+  font-family: arial;
 }
 a {
-    color: $link-color;
-    &:hover {
-        color: black;
-        background-color: $link-color;
-        text-decoration: none
-    }
+  color: $link-color;
+  &:hover {
+    color: black;
+    background-color: $link-color;
+    text-decoration: none
+  }
 }
 h1 {
-    font-size: 6em;
-    letter-spacing: -.05em;
+  font-size: 6em;
+  letter-spacing: -.05em;
 }
 h2 {
-    letter-spacing: -2px;
+  letter-spacing: -2px;
 }
 .header {
-    border-top: 10px solid $accent-color;
-    text-align: center;
-    .logo  {
-        display: inline-block;
-        margin: 2em 0;
-        img {
-            max-height: 200px;
-        }
-    }
+  border-top: 10px solid $accent-color;
+  text-align: center;
+  .logo  {
+    display: inline-block;
+    margin: 2em 0;
+    img {
+      max-height: 200px;
+      }
+  }
 }
 .header .nav {
-    a {
-        color: $link-color;
-        &:hover, &:active {
-            color: black;
-            background-color: $accent-color;
-        }
-    }
+  a {
+    color: $link-color;
+    &:hover, &:active {
+      color: black;
+      background-color: $accent-color;
+      }
+  }
 }
 .content {
-    margin-top: 1em;
+  margin-top: 1em;
 }
 .post {
-    margin-bottom: 2em;
-    h2 {
-        display: inline;
-    }
-    .wrapper {
-        margin-bottom: 1em;
-    }
+  margin-bottom: 2em;
+  h2 {
+    display: inline;
+  }
+  .wrapper {
+    margin-bottom: 1em;
+  }
 }
 .post-details {
-    display: inline-block;
-    position: relative;
-    margin-left: 1em;
-    h5 { margin: 0; }
+  display: inline-block;
+  position: relative;
+  margin-left: 1em;
+  h5 { margin: 0; }
 }
 .post-type {
-    font-style: italic;
-    color: lighten(black, 50%);
+  font-style: italic;
+  color: lighten(black, 50%);
 }
 ///////////////
 .track-player {
-    position: relative;
-    border-left: 6px solid $accent-color;
-    border-right: 6px solid $accent-color;
-    padding: 0 2em;
-    h4 {
-        display: inline-block;
-        margin-left: 1em;
-        line-height: 1.3em;
-    }
+  position: relative;
+  border-left: 6px solid $accent-color;
+  border-right: 6px solid $accent-color;
+  padding: 0 2em;
+  h4 {
+    display: inline-block;
+    margin-left: 1em;
+    line-height: 1.3em;
+  }
 }
 .play-toggle {
-    display: inline-block;
-    a {
-        position: absolute;
-        top: 0;
-        left: 0;
-        font-size: 1.4em;
-        &.pause { display: none; }
-    }
-    &.playing {
-        a.pause { display: block; }
-        a.play { display: none; }
-    }
+  display: inline-block;
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.4em;
+    &.pause { display: none; }
+  }
+  &.playing {
+    a.pause { display: block; }
+    a.play { display: none; }
+  }
 }
 /////////////
 .art {
-    display: none;
-    border: 3px solid $accent-color;
-    position: fixed;
-    right: 0;
+  display: none;
+  border: 3px solid $accent-color;
+  position: fixed;
+  right: 0;
 }
-    
+
 // Media Queries
 @media (max-width: 768px) {
-    .post-details {
-        display: block;
-        margin-left: 0;
-        h5 { 
-            display: inline-block;
-            margin-left: 5px;
-        }
-    }
+  .post-details {
+    display: block;
+    margin-left: 0;
+    h5 { 
+      display: inline-block;
+      margin-left: 5px;
+      }
+  }
 }
