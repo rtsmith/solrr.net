@@ -25,19 +25,19 @@ var TrackPlayer = React.createClass({
   // so use componentWillMount hook for this init load
   componentWillMount: function() {
     TrackActions.dataLoad(this.props.id);
-    TrackStore.listen(function(data) {
+    TrackStore.listen((data) => {
       if (data.id == this.props.id) {
         this.setState({ data: data });
       }
-    }.bind(this));
+    });
   },
 
   componentDidMount: function() {
-    PlayerStore.listen(function(track_state) {
+    PlayerStore.listen((track_state) => {
       // setState merges objects, so state.data remains
       // the same as long as the store doesn't send it
       this.setState(track_state);
-    }.bind(this));
+    });
   },
 
   handlePlayToggle: function() {
@@ -53,13 +53,17 @@ var TrackPlayer = React.createClass({
     }
   },
 
+  thisTrackPlaying: function() {
+    return this.state.idLoaded == this.state.data.id && this.state.isPlaying ? true : false;
+  },
+
   render: function() {
     return (
       <div className="track-player">
         {/* use a title we provide */}
         <h4>{this.props.title}</h4>
-        <PlayToggle onToggleClick={this.handlePlayToggle} track_data={this.state} id={this.props.id}/>
-        <PlayProgress track_data={this.state} id={this.props.id} />
+        <PlayToggle onToggleClick={this.handlePlayToggle} isTrackPlaying={this.thisTrackPlaying} />
+        <PlayProgress track_data={this.state} isTrackPlaying={this.thisTrackPlaying} />
       </div>
     );
   }

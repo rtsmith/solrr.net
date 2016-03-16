@@ -2,7 +2,7 @@ var React = require('react');
 
 const PlayToggle = React.createClass({
   render: function() {
-    const trackClass = this.props.track_data.idLoaded == this.props.id && this.props.track_data.isPlaying ? "fa fa-pause" : "fa fa-play";
+    const trackClass = this.props.isTrackPlaying() ? "fa fa-pause" : "fa fa-play";
     return (
       <div className="play-toggle">
         <a onClick={this.props.onToggleClick}>

@@ -118,12 +118,13 @@ h2 {
     top: 0;
     left: 0;
     font-size: 1.4em;
-    &.pause { display: none; }
+    cursor: pointer;
   }
-  &.playing {
-    a.pause { display: block; }
-    a.play { display: none; }
-  }
+}
+.play-progress {
+  display: block;
+  height: 1em;
+  border: 1px solid black;
 }
 /////////////
 .art {
