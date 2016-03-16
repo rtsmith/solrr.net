@@ -8,22 +8,22 @@ var Actions = require('../actions');
 var playerStore = Reflux.createStore({
   store: {},
   listenables: Actions,
-  onTrackLoadCompleted: function(player) {
-    // TODO deactivate loading icon here
+  onTrackLoadCompleted: (player) => {
+    // trackload has really just begun here..
     this.store.idLoaded = player.options.soundId;
     this.store.streamer = player;
     this.store.isPlaying = true;
     this.trigger(this.store);
   },
-  onTrackLoadFailed: function(err) {
+  onTrackLoadFailed: (err) => {
     console.error(err);
   },
-  onTrackPlay: function() {
+  onTrackPlay: () => {
     // TODO move loadTrack logic here
     this.store.isPlaying = true;
     this.trigger(this.store);
   },
-  onTrackStop: function() {
+  onTrackStop: () => {
     this.store.isPlaying = false;
     this.trigger(this.store);
   }
