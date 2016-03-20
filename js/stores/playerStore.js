@@ -2,30 +2,41 @@ var Reflux = require('reflux');
 var Actions = require('../actions');
 
 // tracksStore:
-// handles state and logic between tracks.
+// mutates state between tracks.
 // just pass entire "store" object in triggers
 
 var playerStore = Reflux.createStore({
   store: {},
   listenables: Actions,
-  onTrackLoadCompleted: (player) => {
-    // trackload has really just begun here..
+  onTrackInitCompleted: function(player) {
+    // track buffering has really just begun here
     this.store.idLoaded = player.options.soundId;
     this.store.streamer = player;
-    this.store.isPlaying = true;
+    this.store.trackStatus = "loading";
+
+    // set listener to update track status once the track actually starts playing:
+    this.store.streamer.on('play-resume', this.listenForPlay);
     this.trigger(this.store);
   },
-  onTrackLoadFailed: (err) => {
+
+  onTrackInitFailed: function(err) {
     console.error(err);
   },
-  onTrackPlay: () => {
-    // TODO move loadTrack logic here
-    this.store.isPlaying = true;
+
+  onTrackResume: function() {
+    this.store.trackStatus = "playing";
     this.trigger(this.store);
   },
-  onTrackStop: () => {
-    this.store.isPlaying = false;
+
+  onTrackStop: function() {
+    this.store.trackStatus = "idle";
     this.trigger(this.store);
+  },
+
+  listenForPlay: function() {
+    this.store.trackStatus = "playing";
+    this.trigger(this.store);
+    this.store.streamer.off('play-resume', this.listenForPlay);
   }
 });
 

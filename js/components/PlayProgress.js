@@ -9,12 +9,12 @@ var SeekBar = require('./SeekBar');
 var PlayProgress = React.createClass({
   getInitialState: function() {
     return {
-      seek: 10,
+      seek: 0,
       interval: null
     }
   },
   componentWillReceiveProps: function(nextProps) {
-    if (nextProps.isTrackPlaying()) {
+    if (nextProps.state_data.trackStatus == "playing" && nextProps.state_data.idLoaded == nextProps.state_data.data.id) {
       this.interval = window.setInterval( this.incSeek, 100)
     } else {
       window.clearInterval(this.interval);
@@ -30,7 +30,7 @@ var PlayProgress = React.createClass({
   render: function() {
     return (
       <div className="play-progress">
-        <SeekBar duration={this.props.track_data.data.duration} seek={this.state.seek} />
+        <SeekBar duration={this.props.state_data.data.duration} seek={this.state.seek} />
       </div>
     )
   }

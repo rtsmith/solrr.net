@@ -7,16 +7,15 @@ var PlayerStore = require('./stores/playerStore');
 var TrackStore = require('./stores/trackStore');
 
 
-// playerUI just needs to send what track it is and what
-// actions correspond to what buttons pressed
+// TrackPlayer component. UI for a single track
 var TrackPlayer = React.createClass({
   getInitialState: function() {
-    // sync doesnt happen here!
     return {
       idLoaded: 0,
       seek: 0,
-      isPlaying: false, // Boombox comp is playing? only one track can be playing at a time
+      trackStatus: 'none', // "none" (not loaded), "loading", "idle" (loaded, stopped), "playing"
       streamer: {},
+      // track instance data:
       data: {}
     };
   },
@@ -33,28 +32,26 @@ var TrackPlayer = React.createClass({
   },
 
   componentDidMount: function() {
+    // inform the track of the Player state
     PlayerStore.listen((track_state) => {
-      // setState merges objects, so state.data remains
-      // the same as long as the store doesn't send it
       this.setState(track_state);
     });
   },
 
+  /* The PlayerStore handles mutating player state, not component */
   handlePlayToggle: function() {
-    if (this.state.isPlaying) {
+    if (this.state.idLoaded !== this.state.data.id) {
+      TrackActions.trackInit(this.state.data.id);
+      console.log("track ---- load");
+    } else if (this.state.trackStatus == "playing") {
       // track is playing, stop track
       TrackActions.trackStop();
-    } else if (this.state.idLoaded == this.state.data.id) {
-      // track is not playing and is loaded, play track
-      TrackActions.trackPlay();
-    } else {
-      // track is not playing as is not loaded, load track
-      TrackActions.trackLoad(this.state.data.id);
-    }
-  },
-
-  thisTrackPlaying: function() {
-    return this.state.idLoaded == this.state.data.id && this.state.isPlaying ? true : false;
+      console.log("track ---- stop");
+    } else if (this.state.trackStatus == "idle") {
+      // track is not playing and is loaded, resume track
+      TrackActions.trackResume();
+      console.log("track ---- resume");
+    } 
   },
 
   render: function() {
@@ -62,8 +59,8 @@ var TrackPlayer = React.createClass({
       <div className="track-player">
         {/* use a title we provide */}
         <h4>{this.props.title}</h4>
-        <PlayToggle onToggleClick={this.handlePlayToggle} isTrackPlaying={this.thisTrackPlaying} />
-        <PlayProgress track_data={this.state} isTrackPlaying={this.thisTrackPlaying} />
+        <PlayToggle onToggleClick={this.handlePlayToggle} state_data={this.state} />
+        <PlayProgress state_data={this.state} />
       </div>
     );
   }
