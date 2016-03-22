@@ -30,7 +30,7 @@ var PlayProgress = React.createClass({
   render: function() {
     return (
       <div className="play-progress">
-        <SeekBar duration={this.props.state_data.data.duration} seek={this.state.seek} />
+        <SeekBar id={this.props.state_data.data.id} duration={this.props.state_data.data.duration} seek={this.state.seek} />
       </div>
     )
   }

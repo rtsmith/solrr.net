@@ -1,12 +1,11 @@
 var Reflux = require('reflux');
 
 var Actions = Reflux.createActions([
-  "trackResume",
-  "trackStop"
+  "trackToggle",
+  "trackSeek"
 ]);
 
 Actions.dataLoad = Reflux.createAction({ asyncResult: true });
-Actions.trackLoad = Reflux.createAction({ asyncResult: true });
 Actions.trackInit = Reflux.createAction({ asyncResult: true });
 
 Actions.dataLoad.listen(function(id) {
@@ -21,7 +20,5 @@ Actions.trackInit.listen(function(id) {
     .then(this.completed)
     .catch(this.failed)
 });
-
-// Actions.trackLoaded.listen(
 
 module.exports = Actions;

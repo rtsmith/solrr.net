@@ -43,15 +43,8 @@ var TrackPlayer = React.createClass({
     if (this.state.idLoaded !== this.state.data.id) {
       TrackActions.trackInit(this.state.data.id);
       console.log("track ---- load");
-    } else if (this.state.trackStatus == "playing") {
-      // track is playing, stop track
-      TrackActions.trackStop();
-      console.log("track ---- stop");
-    } else if (this.state.trackStatus == "idle") {
-      // track is not playing and is loaded, resume track
-      TrackActions.trackResume();
-      console.log("track ---- resume");
     } 
+    else { TrackActions.trackToggle() }
   },
 
   render: function() {
