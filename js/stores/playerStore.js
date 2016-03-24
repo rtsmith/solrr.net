@@ -24,22 +24,34 @@ var playerStore = Reflux.createStore({
   },
 
   onTrackToggle: function(id) {
-    if (this.store.trackStatus == "playing") {
+    if (id !== this.store.idLoaded) {
+      Actions.trackInit(id); return;
+    }
+    else if (this.store.trackStatus == "playing") {
       this.store.trackStatus = "idle";
-    } else if (this.store.trackStatus == "idle") {
-      this.store.trackStatus = "playing";
-    } else { console.log(this.store.trackStatus); return; }
+    } 
+    else if (this.store.trackStatus == "idle") {
+      this.listenForPlay();
+      return;
+    } 
+    else { 
+      console.log(this.store.trackStatus); return; 
+    }
     this.trigger(this.store);
   },
 
   onTrackSeek: function(x, id) {
-    console.log(`action: ${x} // ${id}`);
+    // TODO: handle first click and load if not loaded
+
+    this.store.seek = x;
+    this.store.trackStatus = "seeking";
+    this.trigger(this.store);
   },
 
   listenForPlay: function() {
     this.store.trackStatus = "playing";
     this.trigger(this.store);
-    this.store.streamer.off('play-resume', this.listenForPlay);
+    // this.store.streamer.off('play-resume', this.listenForPlay);
   }
 });
 

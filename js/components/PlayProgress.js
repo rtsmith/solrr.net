@@ -14,6 +14,12 @@ var PlayProgress = React.createClass({
     }
   },
   componentWillReceiveProps: function(nextProps) {
+    if (nextProps.state_data.trackStatus == "seeking") {
+      console.log(nextProps);
+      console.log("next props " + nextProps);
+      let pos = nextProps.state_data.streamer.options.duration * nextProps.state_data.seek;
+      this.setState({seek: pos});
+    }
     if (nextProps.state_data.trackStatus == "playing" && nextProps.state_data.idLoaded == nextProps.state_data.data.id) {
       this.interval = window.setInterval( this.incSeek, 100)
     } else {
@@ -30,7 +36,12 @@ var PlayProgress = React.createClass({
   render: function() {
     return (
       <div className="play-progress">
-        <SeekBar id={this.props.state_data.data.id} duration={this.props.state_data.data.duration} seek={this.state.seek} />
+        <SeekBar 
+          id={this.props.state_data.data.id} 
+          duration={this.props.state_data.data.duration} 
+          seek={this.state.seek}
+          wave_url={this.props.state_data.data.waveform_url}
+        />
       </div>
     )
   }

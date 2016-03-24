@@ -6,6 +6,7 @@ var TrackActions = require('./actions');
 var PlayerStore = require('./stores/playerStore');
 var TrackStore = require('./stores/trackStore');
 
+var Logger = require('./components/logger');
 
 // TrackPlayer component. UI for a single track
 var TrackPlayer = React.createClass({
@@ -33,18 +34,14 @@ var TrackPlayer = React.createClass({
 
   componentDidMount: function() {
     // inform the track of the Player state
-    PlayerStore.listen((track_state) => {
-      this.setState(track_state);
+    PlayerStore.listen((playerState) => {
+
+      this.setState({playerState: playerState});
     });
   },
 
-  /* The PlayerStore handles mutating player state, not component */
   handlePlayToggle: function() {
-    if (this.state.idLoaded !== this.state.data.id) {
-      TrackActions.trackInit(this.state.data.id);
-      console.log("track ---- load");
-    } 
-    else { TrackActions.trackToggle() }
+    TrackActions.trackToggle(this.state.data.id)
   },
 
   render: function() {
