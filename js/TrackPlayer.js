@@ -34,9 +34,8 @@ var TrackPlayer = React.createClass({
 
   componentDidMount: function() {
     // inform the track of the Player state
-    PlayerStore.listen((playerState) => {
-
-      this.setState({playerState: playerState});
+    PlayerStore.listen((track_state) => {
+      this.setState(track_state);
     });
   },
 
