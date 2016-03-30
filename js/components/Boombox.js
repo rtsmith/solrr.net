@@ -25,7 +25,7 @@ function BoomBoxComponent() {
   }
 
   function seek_to(store) {
-    var pos_ms = Math.floor(store.seek * store.streamer.options.duration);
+    var pos_ms = Math.floor(store.seek.pos * store.streamer.options.duration);
     store.streamer.seek(pos_ms);
     play(store);
   }

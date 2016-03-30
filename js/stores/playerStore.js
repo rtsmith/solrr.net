@@ -10,7 +10,7 @@ var playerStore = Reflux.createStore({
   listenables: Actions,
   onTrackInitCompleted: function(player) {
     // track buffering has really just begun here
-    this.store.idLoaded = player.options.soundId;
+
     this.store.streamer = player;
     this.store.trackStatus = "loading";
 
@@ -25,7 +25,8 @@ var playerStore = Reflux.createStore({
 
   onTrackToggle: function(id) {
     if (id !== this.store.idLoaded) {
-      Actions.trackInit(id); return;
+      Actions.trackInit(id);
+      this.store.idLoaded = id;
     }
     else if (this.store.trackStatus == "playing") {
       this.store.trackStatus = "idle";
@@ -34,16 +35,13 @@ var playerStore = Reflux.createStore({
       this.listenForPlay();
       return;
     } 
-    else { 
-      console.log(this.store.trackStatus); return; 
-    }
     this.trigger(this.store);
   },
 
   onTrackSeek: function(x, id) {
     // TODO: handle first click and load if not loaded
 
-    this.store.seek = x;
+    this.store.seek = { pos: x, id: id};
     this.store.trackStatus = "seeking";
     this.trigger(this.store);
   },

@@ -14,10 +14,8 @@ var PlayProgress = React.createClass({
     }
   },
   componentWillReceiveProps: function(nextProps) {
-    if (nextProps.state_data.trackStatus == "seeking") {
-      console.log(nextProps);
-      console.log("next props " + nextProps);
-      let pos = nextProps.state_data.streamer.options.duration * nextProps.state_data.seek;
+    if (nextProps.state_data.trackStatus == "seeking" && nextProps.state_data.seek.id == nextProps.state_data.data.id) {
+      let pos = nextProps.state_data.streamer.options.duration * nextProps.state_data.seek.pos;
       this.setState({seek: pos});
     }
     if (nextProps.state_data.trackStatus == "playing" && nextProps.state_data.idLoaded == nextProps.state_data.data.id) {
