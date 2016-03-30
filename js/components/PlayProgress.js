@@ -21,9 +21,10 @@ var PlayProgress = React.createClass({
       this.setState({seek: pos});
     }
     if (nextProps.state_data.trackStatus == "playing" && nextProps.state_data.idLoaded == nextProps.state_data.data.id) {
-      this.interval = window.setInterval( this.incSeek, 100)
-    } else {
-      window.clearInterval(this.interval);
+      this.setState({interval: window.setInterval( this.incSeek, 100)});
+    } else if (nextProps.state_data.trackStatus == "idle") {
+      window.clearInterval(this.state.interval);
+      this.setState({interval: null});
     }
   },
 
