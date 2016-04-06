@@ -1,4 +1,5 @@
 var PlayerStore = require('../stores/playerStore');
+var Actions = require('../actions');
 
 //
 // BoomBox component:
@@ -9,31 +10,23 @@ var PlayerStore = require('../stores/playerStore');
 // if the track is very long, check if client has flash
 
 function BoomBoxComponent() {
-  let status;
-  
   function play(store) {
-    // keep a local state if track is playing
-    if (status !== "playing") {
-      store.streamer.play();
-      status = "playing";
-    }
+    store.streamer.play();
   }
 
   function pause(store) {
     store.streamer.pause();
-    status = "paused";
   }
 
   function seek_to(store) {
     var pos_ms = Math.floor(store.seek.pos * store.streamer.options.duration);
     store.streamer.seek(pos_ms);
-    play(store);
+    Actions.updateStatus("playing");
   }
 
   PlayerStore.listen(function(store) {
     if (store.trackStatus == "seeking") {
       seek_to(store);
-      return;
     }
 
     if (store.trackStatus == "idle") {

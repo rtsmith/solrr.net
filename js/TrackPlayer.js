@@ -14,7 +14,7 @@ var TrackPlayer = React.createClass({
     return {
       idLoaded: 0,
       seek: 0,
-      trackStatus: 'none', // "none" (not loaded), "loading", "idle" (loaded, stopped), "playing"
+      trackStatus: 'none', // "none" (not loaded), "loading", "seeking", "idle" (loaded, stopped), "playing"
       streamer: {},
       // track instance data:
       data: {}

@@ -17,6 +17,7 @@ var playerStore = Reflux.createStore({
     // set listener to update track status once the track actually starts playing:
     this.store.streamer.on('play-resume', this.listenForPlay);
     this.trigger(this.store);
+    console.log("LOAD TRIGGER");
   },
 
   onTrackInitFailed: function(err) {
@@ -30,12 +31,14 @@ var playerStore = Reflux.createStore({
     }
     else if (this.store.trackStatus == "playing") {
       this.store.trackStatus = "idle";
+      this.store.streamer.on('play-resume', this.listenForPlay);
     } 
     else if (this.store.trackStatus == "idle") {
-      this.listenForPlay();
-      return;
+      this.store.trackStatus = "playing";
+      this.store.streamer.off('play-resume', this.listenForPlay);
     } 
     this.trigger(this.store);
+    console.log("TOGGLE TRIGGER");
   },
 
   onTrackSeek: function(x, id) {
@@ -46,10 +49,16 @@ var playerStore = Reflux.createStore({
     this.trigger(this.store);
   },
 
+  onUpdateStatus: function(status) {
+    this.store.trackStatus = status;
+    this.trigger(this.store);
+  },
+
   listenForPlay: function() {
     this.store.trackStatus = "playing";
     this.trigger(this.store);
-    // this.store.streamer.off('play-resume', this.listenForPlay);
+    this.store.streamer.off('play-resume', this.listenForPlay);
+    console.log("LISTEN TRIGGER");
   }
 });
 

@@ -14,16 +14,27 @@ var PlayProgress = React.createClass({
     }
   },
   componentWillReceiveProps: function(nextProps) {
-    if (nextProps.state_data.trackStatus == "seeking" && nextProps.state_data.seek.id == nextProps.state_data.data.id) {
+    if (nextProps.state_data.idLoaded !== nextProps.state_data.data.id) { 
+      this.clearTimer();
+      return; 
+    }
+
+    if (nextProps.state_data.trackStatus == "seeking" ) {
       let pos = nextProps.state_data.streamer.options.duration * nextProps.state_data.seek.pos;
+      this.clearTimer();
       this.setState({seek: pos});
+      return;
     }
-    if (nextProps.state_data.trackStatus == "playing" && nextProps.state_data.idLoaded == nextProps.state_data.data.id) {
+
+    if (nextProps.state_data.trackStatus == "playing") {
       this.setState({interval: window.setInterval( this.incSeek, 100)});
-    } else if (nextProps.state_data.trackStatus == "idle") {
-      window.clearInterval(this.state.interval);
-      this.setState({interval: null});
+    } else {
+      this.clearTimer();
     }
+  },
+
+  clearTimer: function() {
+    window.clearInterval(this.state.interval);
   },
 
   incSeek: function() {

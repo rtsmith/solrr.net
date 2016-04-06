@@ -2,7 +2,8 @@ var Reflux = require('reflux');
 
 var Actions = Reflux.createActions([
   "trackToggle",
-  "trackSeek"
+  "trackSeek",
+  "updateStatus"
 ]);
 
 Actions.dataLoad = Reflux.createAction({ asyncResult: true });
