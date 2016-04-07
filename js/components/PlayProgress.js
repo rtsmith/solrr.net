@@ -15,7 +15,7 @@ var PlayProgress = React.createClass({
   },
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.state_data.idLoaded !== nextProps.state_data.data.id) { 
-      this.clearTimer();
+      this.clearTimer(); // if we switch a track, stop the timer on the previous one
       return; 
     }
 

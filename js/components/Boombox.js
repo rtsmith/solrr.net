@@ -27,9 +27,8 @@ function BoomBoxComponent() {
   PlayerStore.listen(function(store) {
     if (store.trackStatus == "seeking") {
       seek_to(store);
-    }
-
-    if (store.trackStatus == "idle") {
+    } 
+    else if (store.trackStatus == "idle") {
       pause(store);
     }
     else if (store.trackStatus == "loading" || "playing") {

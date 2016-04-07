@@ -43,6 +43,10 @@ var playerStore = Reflux.createStore({
 
   onTrackSeek: function(x, id) {
     // TODO: handle first click and load if not loaded
+    if (id !== this.store.idLoaded) { 
+      Actions.trackInit(id);
+      this.store.idLoaded = id;
+    }
 
     this.store.seek = { pos: x, id: id};
     this.store.trackStatus = "seeking";
