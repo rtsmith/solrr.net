@@ -13,20 +13,21 @@ var PlayProgress = React.createClass({
       interval: null
     }
   },
+
   componentWillReceiveProps: function(nextProps) {
-    if (nextProps.state_data.idLoaded !== nextProps.state_data.data.id) { 
+    if (nextProps.idLoaded !== nextProps.id) { 
       this.clearTimer(); // if we switch a track, stop the timer on the previous one
       return; 
     }
 
-    if (nextProps.state_data.trackStatus == "seeking" ) {
-      let pos = nextProps.state_data.streamer.options.duration * nextProps.state_data.seek.pos;
+    if (nextProps.trackStatus == "seeking" ) {
+      let pos = nextProps.duration * nextProps.seek;
       this.clearTimer();
       this.setState({seek: pos});
       return;
     }
 
-    if (nextProps.state_data.trackStatus == "playing") {
+    if (nextProps.trackStatus == "playing") {
       this.setState({interval: window.setInterval( this.incSeek, 100)});
     } else {
       this.clearTimer();
@@ -47,10 +48,10 @@ var PlayProgress = React.createClass({
     return (
       <div className="play-progress">
         <SeekBar 
-          id={this.props.state_data.data.id} 
-          duration={this.props.state_data.data.duration} 
+          id={this.props.id} 
+          idLoaded={this.props.idLoaded}
           seek={this.state.seek}
-          wave_url={this.props.state_data.data.waveform_url}
+          wave_url={this.props.waveUrl}
         />
       </div>
     )

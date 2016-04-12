@@ -4,9 +4,16 @@ var Actions = require('../actions');
 var SeekBar = React.createClass({
   listenSeek: function(event) {
     var rect = event.currentTarget.getBoundingClientRect();
-    var relative_pos = (event.clientX - rect.left) / rect.width;
-    Actions.trackSeek(relative_pos, this.props.id);
+    var relativePos = (event.clientX - rect.left) / rect.width;
+
+    if (this.props.idLoaded === 0 || this.props.idLoaded !== this.props.id) {
+      Actions.initTrackAndSeek(relativePos, this.props.id);
+      return;
+    }
+
+    Actions.trackSeek(relativePos);
   },
+
   render: function() {
     var pos = this.props.seek;
     var style = {

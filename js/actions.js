@@ -7,7 +7,8 @@ var Actions = Reflux.createActions([
 ]);
 
 Actions.dataLoad = Reflux.createAction({ asyncResult: true });
-Actions.trackInit = Reflux.createAction({ asyncResult: true });
+Actions.initTrack = Reflux.createAction({ asyncResult: true });
+Actions.initTrackAndSeek = Reflux.createAction({ asyncResult: true });
 
 Actions.dataLoad.listen(function(id) {
   SC.get(`/tracks/${id}`)
@@ -15,8 +16,13 @@ Actions.dataLoad.listen(function(id) {
     .catch(this.failed)
 });
 
-Actions.trackInit.listen(function(id) {
-  // TODO activate loading icon here
+Actions.initTrack.listen(function(id) {
+  SC.stream(`/tracks/${id}`)
+    .then(this.completed)
+    .catch(this.failed)
+});
+
+Actions.initTrackAndSeek.listen(function(x, id) {
   SC.stream(`/tracks/${id}`)
     .then(this.completed)
     .catch(this.failed)

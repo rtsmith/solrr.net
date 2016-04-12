@@ -18,21 +18,24 @@ function BoomBoxComponent() {
     store.streamer.pause();
   }
 
-  function seek_to(store) {
-    var pos_ms = Math.floor(store.seek.pos * store.streamer.options.duration);
+  function seekTo(store) {
+    var pos_ms = Math.floor(store.seek * store.streamer.options.duration);
     store.streamer.seek(pos_ms);
     Actions.updateStatus("playing");
   }
 
   PlayerStore.listen(function(store) {
-    if (store.trackStatus == "seeking") {
-      seek_to(store);
+    if (store.trackStatus === "seeking") {
+      seekTo(store);
+      return;
     } 
-    else if (store.trackStatus == "idle") {
+    else if (store.trackStatus === "idle") {
       pause(store);
+      return;
     }
-    else if (store.trackStatus == "loading" || "playing") {
+    else if (store.trackStatus === "playing") {
       play(store);
+      return;
     }
   });
 }

@@ -13,9 +13,9 @@ var TrackPlayer = React.createClass({
   getInitialState: function() {
     return {
       idLoaded: 0,
-      seek: 0,
       trackStatus: 'none', // "none" (not loaded), "loading", "seeking", "idle" (loaded, stopped), "playing"
-      streamer: {},
+      seek: 0,
+      streamer: {options: {duration: 0}},
       // track instance data:
       data: {}
     };
@@ -40,16 +40,27 @@ var TrackPlayer = React.createClass({
   },
 
   handlePlayToggle: function() {
-    TrackActions.trackToggle(this.state.data.id)
+    if (this.state.idLoaded !== this.props.id) {
+      TrackActions.initTrack(this.state.data.id);
+    }
+    else {
+      TrackActions.trackToggle(this.state.data.id)
+    }
   },
 
   render: function() {
     return (
       <div className="track-player">
-        {/* use a title we provide */}
         <h4>{this.props.title}</h4>
         <PlayToggle onToggleClick={this.handlePlayToggle} state_data={this.state} />
-        <PlayProgress state_data={this.state} />
+        <PlayProgress 
+          id={this.state.data.id}
+          idLoaded={this.state.idLoaded}
+          duration={this.state.streamer.options.duration}
+          seek={this.state.seek}
+          trackStatus={this.state.trackStatus}
+          waveUrl={this.state.data.waveform_url}
+        />
       </div>
     );
   }

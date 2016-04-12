@@ -8,16 +8,30 @@ var Actions = require('../actions');
 var playerStore = Reflux.createStore({
   store: {},
   listenables: Actions,
-  onTrackInitCompleted: function(player) {
-    // track buffering has really just begun here
 
-    this.store.streamer = player;
+  onInitTrack: function() {
     this.store.trackStatus = "loading";
-
-    // set listener to update track status once the track actually starts playing:
-    this.store.streamer.on('play-resume', this.listenForPlay);
     this.trigger(this.store);
-    console.log("LOAD TRIGGER");
+  },
+
+  onInitTrackCompleted: function(player) {
+    this.store.streamer = player;
+    this.store.idLoaded = player.options.soundId;
+    this.store.trackStatus = "playing";
+    this.trigger(this.store);
+  },
+
+  onInitTrackAndSeek: function(x, id) {
+    this.store.trackStatus = "loading";
+    this.store.seek = x;
+    this.trigger(this.store);
+  },
+
+  onInitTrackAndSeekCompleted: function(player) {
+    this.store.streamer = player;
+    this.store.idLoaded = player.options.soundId;
+    this.store.trackStatus = "seeking";
+    this.trigger(this.store);
   },
 
   onTrackInitFailed: function(err) {
@@ -25,30 +39,17 @@ var playerStore = Reflux.createStore({
   },
 
   onTrackToggle: function(id) {
-    if (id !== this.store.idLoaded) {
-      Actions.trackInit(id);
-      this.store.idLoaded = id;
-    }
-    else if (this.store.trackStatus == "playing") {
+    if (this.store.trackStatus === "playing") {
       this.store.trackStatus = "idle";
-      this.store.streamer.on('play-resume', this.listenForPlay);
     } 
-    else if (this.store.trackStatus == "idle") {
+    else if (this.store.trackStatus === "idle") {
       this.store.trackStatus = "playing";
-      this.store.streamer.off('play-resume', this.listenForPlay);
     } 
     this.trigger(this.store);
-    console.log("TOGGLE TRIGGER");
   },
 
-  onTrackSeek: function(x, id) {
-    // TODO: handle first click and load if not loaded
-    if (id !== this.store.idLoaded) { 
-      Actions.trackInit(id);
-      this.store.idLoaded = id;
-    }
-
-    this.store.seek = { pos: x, id: id};
+  onTrackSeek: function(x) {
+    this.store.seek = x;
     this.store.trackStatus = "seeking";
     this.trigger(this.store);
   },
@@ -57,13 +58,6 @@ var playerStore = Reflux.createStore({
     this.store.trackStatus = status;
     this.trigger(this.store);
   },
-
-  listenForPlay: function() {
-    this.store.trackStatus = "playing";
-    this.trigger(this.store);
-    this.store.streamer.off('play-resume', this.listenForPlay);
-    console.log("LISTEN TRIGGER");
-  }
 });
 
 module.exports = playerStore;
