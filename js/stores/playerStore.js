@@ -21,19 +21,6 @@ var playerStore = Reflux.createStore({
     this.trigger(this.store);
   },
 
-  onInitTrackAndSeek: function(x, id) {
-    this.store.trackStatus = "loading";
-    this.store.seek = x;
-    this.trigger(this.store);
-  },
-
-  onInitTrackAndSeekCompleted: function(player) {
-    this.store.streamer = player;
-    this.store.idLoaded = player.options.soundId;
-    this.store.trackStatus = "seeking";
-    this.trigger(this.store);
-  },
-
   onTrackInitFailed: function(err) {
     console.error(err);
   },

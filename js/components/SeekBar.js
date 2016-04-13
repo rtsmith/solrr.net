@@ -7,7 +7,7 @@ var SeekBar = React.createClass({
     var relativePos = (event.clientX - rect.left) / rect.width;
 
     if (this.props.idLoaded === 0 || this.props.idLoaded !== this.props.id) {
-      Actions.initTrackAndSeek(relativePos, this.props.id);
+      Actions.initTrack(this.props.id);
       return;
     }
 
