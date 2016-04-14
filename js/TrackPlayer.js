@@ -55,7 +55,7 @@ var TrackPlayer = React.createClass({
         <PlayProgress 
           id={this.state.data.id}
           idLoaded={this.state.idLoaded}
-          duration={this.state.streamer.options.duration}
+          duration={this.state.data.duration}
           seek={this.state.seek}
           trackStatus={this.state.trackStatus}
           waveUrl={this.state.data.waveform_url}

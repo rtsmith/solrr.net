@@ -115,8 +115,9 @@ h2 {
   display: inline-block;
   a {
     position: absolute;
+    z-index: 10;
     top: 0;
-    left: 0;
+    left: 5px;
     font-size: 1.4em;
     cursor: pointer;
   }
@@ -124,17 +125,29 @@ h2 {
 .seekbar {
   position: relative;
   height: 60px;
-  background: $color;
+  background: lighten($color, 20%);
+  cursor: pointer;
+  &:hover {
+    background: lighten($color, 10%);
+  }
   .seek-pos {
     height: 100%;
     width: 0;
     position: absolute;
     z-index: 0;
     border-right: 5px solid purple;
+    background: transparentize($accent-color, .9);
   }
   span {
     position: absolute;
-    top: -22px;
+    bottom: 0;
+    padding: 2px;
+    background: transparentize(lightgrey, .3);
+  }
+  span:nth-child(2) {
+    left: 0;
+  }
+  span:nth-child(3) {
     right: 0;
   }
 }

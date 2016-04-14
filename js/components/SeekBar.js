@@ -1,5 +1,6 @@
 var React = require('react')
 var Actions = require('../actions');
+var Time = require('../helpers/time');
 
 var SeekBar = React.createClass({
   listenSeek: function(event) {
@@ -14,20 +15,24 @@ var SeekBar = React.createClass({
   },
 
   render: function() {
-    var pos = Math.floor(this.props.seek / 1000);
+    var pos = Time.format(this.props.seek) || '';
     var relativePos = `${(this.props.seek / this.props.duration) * 100 || 0}%`;
     var style = {
       backgroundImage: `url(${this.props.wave_url})`,
       backgroundSize: "cover"
     }
+    var posStyle = {
+      display: this.props.seek > 0 ? "inline" : "none"
+    }
     var seekStyle = {
       width: relativePos,
-      display: pos > 0 ? "block" : "none"
+      display: this.props.seek > 0 ? "block" : "none"
     }
     return (
       <div onClick={this.listenSeek} className="seekbar" style={style}>
         <div className="seek-pos" style={seekStyle}></div>
-        <span>{pos > 0 ? pos : '' }</span> 
+        <span style={posStyle}>{pos}</span> 
+        <span>{Time.format(this.props.duration)}</span>
       </div>
     )
   }
