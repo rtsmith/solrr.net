@@ -102,9 +102,9 @@ h2 {
 ///////////////
 .track-player {
   position: relative;
+  background: lighten(black, 95%);
   border-left: 6px solid $accent-color;
   border-right: 6px solid $accent-color;
-  padding: 0 2em;
   h4 {
     display: inline-block;
     margin-left: 1em;
@@ -123,11 +123,17 @@ h2 {
 }
 .seekbar {
   position: relative;
-  height: 30px;
-  border: 1px solid black;
+  height: 60px;
   background: $color;
+  .seek-pos {
+    height: 100%;
+    width: 0;
+    position: absolute;
+    z-index: 0;
+    border-right: 5px solid purple;
+  }
   span {
-    position: absolute;;
+    position: absolute;
     top: -22px;
     right: 0;
   }

@@ -8,21 +8,26 @@ var SeekBar = React.createClass({
 
     if (this.props.idLoaded === 0 || this.props.idLoaded !== this.props.id) {
       Actions.initTrack(this.props.id);
-      return;
+    } else {
+      Actions.trackSeek(relativePos);
     }
-
-    Actions.trackSeek(relativePos);
   },
 
   render: function() {
-    var pos = this.props.seek;
+    var pos = Math.floor(this.props.seek / 1000);
+    var relativePos = `${(this.props.seek / this.props.duration) * 100 || 0}%`;
     var style = {
       backgroundImage: `url(${this.props.wave_url})`,
-      backgroundSize: "contain"
+      backgroundSize: "cover"
+    }
+    var seekStyle = {
+      width: relativePos,
+      display: pos > 0 ? "block" : "none"
     }
     return (
-      <div onClick={this.listenSeek} style={style} className="seekbar">
-        <span>{pos / 1000}</span> 
+      <div onClick={this.listenSeek} className="seekbar" style={style}>
+        <div className="seek-pos" style={seekStyle}></div>
+        <span>{pos > 0 ? pos : '' }</span> 
       </div>
     )
   }

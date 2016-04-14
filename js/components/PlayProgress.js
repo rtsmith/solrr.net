@@ -48,6 +48,7 @@ var PlayProgress = React.createClass({
     return (
       <div className="play-progress">
         <SeekBar 
+          duration={this.props.duration}
           id={this.props.id} 
           idLoaded={this.props.idLoaded}
           seek={this.state.seek}
