@@ -21,14 +21,14 @@ var PlayProgress = React.createClass({
       return; 
     }
 
-    if (nextProps.trackStatus == "seeking" ) {
+    if (nextProps.trackStatus === "seeking" ) {
       let pos = nextProps.duration * nextProps.seek;
       this.clearTimer();
       this.setState({seek: pos});
       return;
     }
 
-    if (nextProps.trackStatus == "playing") {
+    if (nextProps.trackStatus === "playing") {
       this.setState({interval: window.setInterval( this.incSeek, 100)});
     } else {
       this.clearTimer();

@@ -26,7 +26,7 @@ var TrackPlayer = React.createClass({
   componentWillMount: function() {
     TrackActions.dataLoad(this.props.id);
     TrackStore.listen((data) => {
-      if (data.id == this.props.id) {
+      if (data.id === this.props.id) {
         this.setState({ data: data });
       }
     });
