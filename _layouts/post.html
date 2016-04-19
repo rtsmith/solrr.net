@@ -12,8 +12,8 @@ layout: default
     {{ content }}
 
     {% if post.soundcloud-url %}
-    <div class="audio-player" data-title="{{ post.title }}" data-track_url="{{ post.soundcloud-url }}"></div>
+    <div class="audio-player" data-title="{{ post.title }}" data-track_url="{{ page.soundcloud-url }}"></div>
     {% else post.soundcloud %}
-    <div class="audio-player" data-title="{{ post.title }}" data-track_id="{{ post.soundcloud }}"></div>
+    <div class="audio-player" data-title="{{ post.title }}" data-track_id="{{ page.soundcloud }}"></div>
     {% endif %}
 </div>
