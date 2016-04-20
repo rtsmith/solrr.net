@@ -9,6 +9,17 @@ var playerStore = Reflux.createStore({
   store: {},
   listenables: Actions,
 
+  getInitialState: function() {
+    return {
+      idLoaded: 0,
+      trackStatus: 'none', // "none" (not loaded), "loading", "seeking", "idle" (loaded, stopped), "playing"
+      seek: 0,
+      streamer: {options: {duration: 0}},
+      // track instance data:
+      data: {}
+    };
+  },
+
   onInitTrack: function() {
     this.store.trackStatus = "loading";
     this.trigger(this.store);

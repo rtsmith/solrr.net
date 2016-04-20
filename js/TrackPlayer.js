@@ -1,4 +1,5 @@
 var React = require('react');
+var Reflux = require('reflux');
 var PlayProgress = require('./components/PlayProgress');
 var PlayToggle = require('./components/PlayToggle');
 var Boombox = require('./components/Boombox');
@@ -8,18 +9,9 @@ var TrackStore = require('./stores/trackStore');
 
 var Logger = require('./components/logger');
 
-// TrackPlayer component. UI for a single track
+// TrackPlayer, top level component
 var TrackPlayer = React.createClass({
-  getInitialState: function() {
-    return {
-      idLoaded: 0,
-      trackStatus: 'none', // "none" (not loaded), "loading", "seeking", "idle" (loaded, stopped), "playing"
-      seek: 0,
-      streamer: {options: {duration: 0}},
-      // track instance data:
-      data: {}
-    };
-  },
+  mixins: [Reflux.connect(PlayerStore)],
 
   // we will want track data to be rendered serverside,
   // so use componentWillMount hook for this init load
@@ -32,19 +24,12 @@ var TrackPlayer = React.createClass({
     });
   },
 
-  componentDidMount: function() {
-    // inform the track of the Player state
-    PlayerStore.listen((track_state) => {
-      this.setState(track_state);
-    });
-  },
-
   handlePlayToggle: function() {
     if (this.state.idLoaded !== this.props.id) {
-      TrackActions.initTrack(this.state.data.id);
+      TrackActions.initTrack(this.props.id);
     }
     else {
-      TrackActions.trackToggle(this.state.data.id)
+      TrackActions.trackToggle(this.props.id)
     }
   },
 
