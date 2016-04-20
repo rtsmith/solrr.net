@@ -1,5 +1,6 @@
 var React = require('react');
 var SeekBar = require('./SeekBar');
+var Actions = require('../actions');
 
 // playProgress is a component that displays seek position
 // and emits new seek position on click within the seek box.
@@ -45,6 +46,19 @@ var PlayProgress = React.createClass({
    })
   },
 
+  listenSeek: function(event) {
+    var rect = event.currentTarget.getBoundingClientRect();
+    var relativePos = (event.clientX - rect.left) / rect.width;
+
+    if (this.props.trackStatus === "seeking" || this.props.trackStatus === "loading") {
+      return;
+    } else if (this.props.idLoaded === 0 || this.props.idLoaded !== this.props.id) {
+      Actions.initTrack(this.props.id);
+    } else {
+      Actions.trackSeek(relativePos);
+    }
+  },
+
   render: function() {
     return (
       <div className="play-progress">
@@ -54,6 +68,7 @@ var PlayProgress = React.createClass({
           idLoaded={this.props.idLoaded}
           seek={this.state.seek}
           wave_url={this.props.waveUrl}
+          listenSeek={this.listenSeek}
         />
       </div>
     )
