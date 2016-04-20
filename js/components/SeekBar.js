@@ -6,7 +6,6 @@ var SeekBar = (props) => {
   var relativePos = `${(props.seek / props.duration) * 100 || 0}%`;
   var style = {
     backgroundImage: `url(${props.wave_url})`,
-    backgroundSize: "cover"
   };
   var posStyle = {
     display: props.seek > 0 ? "inline" : "none"
