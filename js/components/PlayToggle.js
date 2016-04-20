@@ -1,7 +1,7 @@
 var React = require('react')
 
 var PlayToggle = (props) => {
-  var trackClass = props.state_data.trackStatus === "playing" && props.state_data.data.id === props.state_data.idLoaded
+  var trackClass = props.trackStatus === "playing" && props.id === props.idLoaded
     ? "fa fa-pause" : "fa fa-play";
   return (
     <div className="play-toggle">
