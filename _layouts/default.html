@@ -37,6 +37,10 @@
           ga('create', 'UA-34750280-1', 'auto');
           ga('send', 'pageview');
         </script>
-        <script src="/js/bundle.js"></script>
+        {% if jekyll.environment == "production" %}
+          <script src="/js/bundle-c.js"></script>
+        {% else %}
+          <script src="/js/bundle.js"></script>
+        {% endif %}
     </body>
 </html>
